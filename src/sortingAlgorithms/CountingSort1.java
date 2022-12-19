@@ -14,7 +14,6 @@ public class CountingSort1 {
     }
 
     public static void countingSort1(int arr[]) {
-        
         int n = arr.length;
         int max = 0;
         for(int i = 0; i < n; i++) {
@@ -29,7 +28,6 @@ public class CountingSort1 {
         for(int i = 0; i < k; i++) {
             count[i] = 0;
         }
-
         for(int i = 0; i < n; i++) {
             count[arr[i]]++;
         }
@@ -37,12 +35,10 @@ public class CountingSort1 {
         int index = 0;
         for(int i = 0; i < k; i++) {
             for(int j = 0; j < count[i]; j++) {
-
                 arr[index] = i;
                 index++;
             }
         }
-
     } 
     
 }

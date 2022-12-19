@@ -14,7 +14,6 @@ public class RadixSort {
     }
 
     public static void radixSort(int arr[]) {
-
         int n = arr.length;
         int max = arr[0];
 
@@ -44,7 +43,6 @@ public class RadixSort {
         for(int i = 0; i < n; i++) {
             count[(arr[i]/exp)%10]++;
         }
-
         for(int i = 1; i < 10; i++) {
             count[i] = count[i-1] + count[i];
         }

@@ -13,14 +13,12 @@ public class Merge2Array {
     }
 
     public static void merge2Array(int arr1[], int arr2[]) {
-
         int n = arr1.length;
         int m = arr2.length;
 
         int i = 0, j = 0;
 
         while(i < n && j < m) {
-
             if(arr1[i] >= arr2[j]) {
                 System.out.print(arr2[j] + " ");
                 j++;

@@ -15,7 +15,6 @@ public class QuickSort_Naive {
     }
 
     public static void quickSort_Naive(int arr[], int l, int r) {
-
         if(l >= r) {
             return;
         }
