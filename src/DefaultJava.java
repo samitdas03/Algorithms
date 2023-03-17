@@ -9,19 +9,15 @@ import java.math.*;
 
 public class DefaultJava {
     static long mod = Long.MAX_VALUE;
-    static int maxN = 10000001;
-    static long factorial[] = new long[maxN];
-    static long inverse[] = new long[maxN];
+    static OutputStream outputStream = System.out;
+    static PrintWriter out = new PrintWriter(outputStream);
+    static FastReader f = new FastReader();
 
     public static void main(String[] args) {
-        OutputStream outputStream = System.out;
-        PrintWriter out = new PrintWriter(outputStream);
-        FastReader f = new FastReader();
         int t = f.nextInt();
-        // factPreCompute();
 
         while(t-- > 0){
-            solve(f, out);
+            solve();
         }
 
 
@@ -30,13 +26,16 @@ public class DefaultJava {
     }
 
 
-    public static void solve(FastReader f, PrintWriter out) {
+    public static void solve() {
 
     }
 
 
 
-    
+
+
+
+    // Sort an array
     public static void sort(int arr[]) {
         ArrayList<Integer> al = new ArrayList<>();
         for(int i: arr) {
@@ -48,6 +47,7 @@ public class DefaultJava {
         }
     }
 
+    // Find all divisors of n
     public static void allDivisors(int n) {
         for(int i = 1; i*i <= n; i++) {
             if(n%i == 0) {
@@ -59,6 +59,7 @@ public class DefaultJava {
         }
     }
 
+    // Check if n is prime or not
     public static boolean isPrime(int n) {
         if(n < 1) return false;
         if(n == 2 || n == 3) return true;
@@ -71,6 +72,7 @@ public class DefaultJava {
         return true;
     }
 
+    // Find gcd of a and b
     public static long gcd(long a, long b) {
         long dividend = a > b ? a : b;
         long divisor =  a < b ? a : b;
@@ -83,22 +85,23 @@ public class DefaultJava {
         return dividend;
     }
 
+    // Find lcm of a and b
     public static long lcm(long a, long b) {
         long lcm = gcd(a, b);
         long hcf = (a * b) / lcm;
         return hcf;
     }
 
+    // Find factorial in O(n) time
     public static long fact(int n) {
         long res = 1;
-        for(int i = 2; i <=n; i++) {
-            res = (res * i)%mod;
+        for(int i = 2; i <= n; i++) {
+            res = res * i;
         }
         return res;
     }
 
-
-    // Find power in logb time
+    // Find power in O(logb) time
     public static long power(long a, long b) {
         long res = 1;
         while(b > 0) {
@@ -111,67 +114,33 @@ public class DefaultJava {
         return res;
     }
 
-    // Find modulo inverse of a number
-    public static long moduloInverse(long n) {
-        return power(n, mod-2);
-    }
-
-    // Precomputation
-    public static void factInvPreCompute() {
-        long fact = 1;
-        factorial[0] = 1;
-        inverse[0] = 1;
-
-        for(int i = 1; i < maxN; i++) {
-            fact = (fact * i)%mod;
-            factorial[i] = fact;
-            inverse[i] = power(factorial[i], mod-2);
-        }
-    }
-    public static void factPreCompute() {
-        long fact = 1;
-        factorial[0] = 1;
-
-        for(int i = 1; i < maxN; i++) {
-            fact = (fact * i)%mod;
-            factorial[i] = fact;
-        }
-    }
-
-
-    // (a/b)%mod == (a * moduloInverse(b)) % mod;
-    // moduloInverse(b) = power(b, mod-2);
+    // Find nCr
     public static long nCr(int n, int r) {
         if(r < 0 || r > n) {
             return 0;
         }
-        long ans = factorial[n];
-        ans = (ans * inverse[n-r])%mod;
-        ans = (ans * inverse[r])%mod;
+        long ans = fact(n) / (fact(r) * fact(n-r));
         return ans;
     }
 
+    // Find nPr
     public static long nPr(int n, int r) {
         if(r < 0 || r > n) {
             return 0;
         }
-        long ans = factorial[n];
-        ans = (ans * inverse[r])%mod;
+        long ans = fact(n) / fact(r);
         return ans;
     }
 
 
-
-
-
-
+    // sort all characters of a string
     public static String sortString(String inputString) {
         char tempArray[] = inputString.toCharArray();
         Arrays.sort(tempArray);
         return new String(tempArray);
     }
 
-
+    // User defined class for fast I/O
     static class FastReader {
         BufferedReader br;
         StringTokenizer st;
@@ -192,23 +161,23 @@ public class DefaultJava {
             return st.nextToken();
         }
 
-        // boolean hasNext() {
-        //     if (st != null && st.hasMoreTokens()) {
-        //         return true;
-        //     }
-        //     String tmp;
-        //     try {
-        //         br.mark(1000);
-        //         tmp = br.readLine();
-        //         if (tmp == null) {
-        //             return false;
-        //         }
-        //         br.reset();
-        //     } catch (IOException e) {
-        //         return false;
-        //     }
-        //     return true;
-        // }
+        boolean hasNext() {
+            if (st != null && st.hasMoreTokens()) {
+                return true;
+            }
+            String tmp;
+            try {
+                br.mark(1000);
+                tmp = br.readLine();
+                if (tmp == null) {
+                    return false;
+                }
+                br.reset();
+            } catch (IOException e) {
+                return false;
+            }
+            return true;
+        }
     
         int nextInt() {
             return Integer.parseInt(next());
@@ -243,8 +212,16 @@ public class DefaultJava {
 
         int[] nextArray(int n) {
             int[] a = new int[n];
-            for(int i=0; i<n; i++) {
+            for(int i = 0; i < n; i++) {
                 a[i] = nextInt();
+            }
+            return a;
+        }
+
+        long[] nextArrayLong(int n) {
+            long[] a = new long[n];
+            for(int i = 0; i < n; i++) {
+                a[i] = nextLong();
             }
             return a;
         }
@@ -297,7 +274,9 @@ Dec  Char                           Dec  Char     Dec  Char     Dec  Char
  */
 
 
-
+ 
+// (a/b)%mod == (a * moduloInverse(b)) % mod;
+// moduloInverse(b) = power(b, mod-2);
 
 
 
